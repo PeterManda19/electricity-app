@@ -1,6 +1,13 @@
 function Electricity() {
+    // Initialize variables
+    let unitsAvailable = 0;
+    let totalUnitsBought = 0;
+    let totalAmountSpent = 0;
+    let advanceUsed = false;
+
 
     // do we want to go with this or array? 
+    // Map appliances to their unit usage
     let appliances = {
         'Stove': 10, 
         'Kettle': 5, 
@@ -14,7 +21,7 @@ function Electricity() {
     }
 
     function getUnitsAvailable() {
-         return unitsAvailable;
+        return unitsAvailable;
     }
 
     /*

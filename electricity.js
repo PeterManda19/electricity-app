@@ -1,3 +1,8 @@
+/**
+ * Factory function for the Electricity app.
+ * Manages electricity units, top-ups, appliance usage, and related calculations.
+ * @returns {Object} The public interface of the Electricity app.
+ */
 function Electricity() {
     // Initialize variables
     let unitsAvailable = 0;
@@ -14,6 +19,20 @@ function Electricity() {
         'TV': 3, 
         'Fridge': 13
     };
+
+    // Load data from localStorage, if available
+    function initializeElectricityDataFromLocalStorage(){
+        const storedData = localStorage.getItem('electricityData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            unitsAvailable = parsedData.unitsAvailable;
+            totalCostUnitsBought = parsedData.totalCostUnitsBought;
+            totalCostAmountSpent = parsedData.totalCostAmountSpent;
+            isAdvanceUsed = parsedData.isAdvanceUsed;
+        }
+    }
+
+    
 
     function topUpElectricity(amount) {
         let units = 0;

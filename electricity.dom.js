@@ -45,6 +45,9 @@ function updateDisplay() {
     } else {
       advanceTakenElement.classList.add('hidden');
     }
+
+    // Save the data to localStorage
+     
 }
 
 // DOM events here 

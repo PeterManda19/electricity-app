@@ -9,6 +9,7 @@ function Electricity() {
     let totalCostUnitsBought = 0;
     let totalCostAmountSpent = 0;
     let isAdvanceUsed = false;
+    let advanceUnits = 21;
 
     // do we want to go with this or array? 
     // Map appliances to their unit usage
@@ -62,9 +63,10 @@ function Electricity() {
             units = 14;
         } else if (amount === 50) {
             units = 35;
-        } else if (amount === 30 && !isAdvanceUsed) {
-            units = 21;
+        } else if (amount === 'advance' && !isAdvanceUsed) {
+            units = advanceUnits;
             isAdvanceUsed = true;
+            advanceUnits = 0;
         }
 
         unitsAvailable += units;
@@ -117,6 +119,5 @@ function Electricity() {
         totalUnitsBought,
         saveDataToLocalStorage,
         initializeElectricityDataFromLocalStorage
-
     }
 }

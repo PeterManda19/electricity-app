@@ -15,9 +15,15 @@ const electricity =  Electricity();
  * Handle the top-up button click event.
  */
 function handleTopUpClick() {
-    const selectedAmount = document.querySelector('input[name="buyElectricity"]:checked').value;
-    electricity.topUpElectricity(Number(selectedAmount));
-    updateDisplay();
+    const selectedAmount = document.querySelector('input[name="buyElectricity"]:checked');
+    if (selectedAmount) {
+        const amountValue = Number(selectedAmount.value);
+        electricity.topUpElectricity(amountValue);
+        updateDisplay();
+    } else {
+        // Display an error message
+        console.error('No top-up amount selected.');
+    }
 }
 
 /**
@@ -27,9 +33,9 @@ function handleUseClick() {
     const selectedAppliance = document.querySelector('input[name="useElectricity"]:checked').value;
     const canUseAppliance = electricity.useAppliance(selectedAppliance);
     if (canUseAppliance) {
-      updateDisplay();
+        updateDisplay();
     } else {
-      alert('Not enough electricity units available to use this appliance.');
+        alert('Not enough electricity units available to use this appliance.');
     }
 }
 
@@ -40,16 +46,19 @@ function updateDisplay() {
     unitsAvailableElement.textContent = electricity.getUnitsAvailable();
     totalUnitsElement.textContent = electricity.totalUnitsBought();
     totalAmountElement.textContent = electricity.totalAmountSpent();
+    
     if (electricity.advanceTaken()) {
-      advanceTakenElement.classList.remove('hidden');
+        advanceTakenElement.classList.remove('hidden');
     } else {
-      advanceTakenElement.classList.add('hidden');
+        advanceTakenElement.classList.add('hidden');
     }
 
     // Save the data to localStorage
-    //electricity.saveDataToLocalStorage();
-     
+    electricity.saveDataToLocalStorage();   
 }
+
+// Load data from localStorage, if available
+electricity.initializeElectricityDataFromLocalStorage();
 
 // DOM events here 
 topUpNowButton.addEventListener('click', handleTopUpClick);

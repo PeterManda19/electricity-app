@@ -10,9 +10,6 @@ function Electricity() {
     let totalCostAmountSpent = 0;
     let isAdvanceUsed = false;
 
-    //initializeElectricityDataFromLocalStorage();
-
-
     // do we want to go with this or array? 
     // Map appliances to their unit usage
     let appliances = {
@@ -23,16 +20,26 @@ function Electricity() {
     };
 
     // Load data from localStorage, if available
-    function initializeElectricityDataFromLocalStorage(){
-        const storedData = localStorage.getItem('electricityData');
-        if (storedData) {
+    function initializeElectricityDataFromLocalStorage() {
+        if (typeof Storage !== 'undefined') {
+          const storedData = localStorage.getItem('electricityData');
+          if (storedData) {
             const parsedData = JSON.parse(storedData);
             unitsAvailable = parsedData.unitsAvailable;
             totalCostUnitsBought = parsedData.totalCostUnitsBought;
             totalCostAmountSpent = parsedData.totalCostAmountSpent;
             isAdvanceUsed = parsedData.isAdvanceUsed;
+          }
+        } else {
+          // Handle the case when local storage is not available
+          // Set default values for the variables
+          unitsAvailable = 0;
+          totalCostUnitsBought = 0;
+          totalCostAmountSpent = 0;
+          isAdvanceUsed = false;
         }
     }
+      
 
     function saveDataToLocalStorage() {
         const data = {
@@ -75,6 +82,7 @@ function Electricity() {
     */
     function useAppliance(appliance) {
         let unitsRequired = appliances[appliance];
+        console.log(unitsRequired);
 
         if (unitsAvailable >= unitsRequired) {
             unitsAvailable -= unitsRequired;
@@ -89,7 +97,11 @@ function Electricity() {
     }
 
     function totalAmountSpent() {
-        return totalCostAmountSpent.toFixed(2);
+        if (totalCostAmountSpent !== null && totalCostAmountSpent !== undefined) {
+            return totalCostAmountSpent.toFixed(2);
+        } else {
+            return 0; //add 0 as default value
+        }
     }    
 
     function totalUnitsBought(){
@@ -103,7 +115,8 @@ function Electricity() {
         useAppliance,
         totalAmountSpent,
         totalUnitsBought,
-        //saveDataToLocalStorage
+        saveDataToLocalStorage,
+        initializeElectricityDataFromLocalStorage
 
     }
 }

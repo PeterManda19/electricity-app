@@ -43,16 +43,26 @@ function Electricity() {
     * other wise return false and do nothing.
     */
     function useAppliance(appliance) {
-        
+        let unitsRequired = appliances[appliance];
+
+        if (unitsAvailable >= unitsRequired) {
+            unitsAvailable -= unitsRequired;
+            return true;
+        } else {
+            return false;
+        }    
     }
 
     function advanceTaken() {
+        return isAdvanceUsed;
     }
 
     function totalAmountSpent() {
-    }
+        return totalCostAmountSpent.toFixed(2);
+    }    
 
     function totalUnitsBought(){
+        return totalCostUnitsBought;
     }
 
     return {

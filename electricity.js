@@ -1,9 +1,9 @@
 function Electricity() {
     // Initialize variables
     let unitsAvailable = 0;
-    let totalUnitsBought = 0;
-    let totalAmountSpent = 0;
-    let advanceUsed = false;
+    let totalCostUnitsBought = 0;
+    let totalCostAmountSpent = 0;
+    let isAdvanceUsed = false;
 
 
     // do we want to go with this or array? 

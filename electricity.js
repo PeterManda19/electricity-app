@@ -10,6 +10,7 @@ function Electricity() {
     let totalCostAmountSpent = 0;
     let isAdvanceUsed = false;
     let advanceUnits = 21;
+    const advanceAmount = 30;
 
     // do we want to go with this or array? 
     // Map appliances to their unit usage
@@ -56,23 +57,29 @@ function Electricity() {
 
     function topUpElectricity(amount) {
         let units = 0;
-
+        let cost = 0;
+    
         if (amount === 10) {
             units = 7;
+            cost = 10;
         } else if (amount === 20) {
             units = 14;
+            cost = 20;
         } else if (amount === 50) {
             units = 35;
+            cost = 50;
         } else if (amount === 'advance' && !isAdvanceUsed) {
             units = advanceUnits;
             isAdvanceUsed = true;
             advanceUnits = 0;
+            cost = advanceAmount; // Set the cost to the advance amount
         }
-
+    
         unitsAvailable += units;
         totalCostUnitsBought += units;
-        totalCostAmountSpent += amount;
+        totalCostAmountSpent += cost; // Add the cost to totalCostAmountSpent
     }
+    
 
     function getUnitsAvailable() {
         return unitsAvailable;

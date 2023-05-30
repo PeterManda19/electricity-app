@@ -47,6 +47,7 @@ function updateDisplay() {
     }
 
     // Save the data to localStorage
+    //electricity.saveDataToLocalStorage();
      
 }
 

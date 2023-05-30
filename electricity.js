@@ -10,6 +10,8 @@ function Electricity() {
     let totalCostAmountSpent = 0;
     let isAdvanceUsed = false;
 
+    //initializeElectricityDataFromLocalStorage();
+
 
     // do we want to go with this or array? 
     // Map appliances to their unit usage
@@ -32,7 +34,17 @@ function Electricity() {
         }
     }
 
+    function saveDataToLocalStorage() {
+        const data = {
+            unitsAvailable: unitsAvailable,
+            totalCostUnitsBought: totalCostUnitsBought,
+            totalCostAmountSpent: totalCostAmountSpent,
+            isAdvanceUsed: isAdvanceUsed
+        };
+        localStorage.setItem('electricityData', JSON.stringify(data));
+    }
     
+
 
     function topUpElectricity(amount) {
         let units = 0;
@@ -90,7 +102,8 @@ function Electricity() {
         getUnitsAvailable,
         useAppliance,
         totalAmountSpent,
-        totalUnitsBought
+        totalUnitsBought,
+        //saveDataToLocalStorage
 
     }
 }

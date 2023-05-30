@@ -16,8 +16,22 @@ function Electricity() {
     };
 
     function topUpElectricity(amount) {
+        let units = 0;
 
+        if (amount === 10) {
+            units = 7;
+        } else if (amount === 20) {
+            units = 14;
+        } else if (amount === 50) {
+            units = 35;
+        } else if (amount === 30 && !isAdvanceUsed) {
+            units = 21;
+            isAdvanceUsed = true;
+        }
 
+        unitsAvailable += units;
+        totalCostUnitsBought += units;
+        totalCostAmountSpent += amount;
     }
 
     function getUnitsAvailable() {
